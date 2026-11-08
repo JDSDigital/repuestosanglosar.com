@@ -6,7 +6,10 @@
   "HomePage": {
     "title": "Repuestos Anglosar",
     "tagline": "Repuestos en Barinas, Venezuela.",
-    "status": "Nuestro sitio web está en construcción."
+    "status": "Nuestro sitio web está en construcción.",
+    "contactTitle": "Llámanos",
+    "phonePrimary": "+58 426-7277922",
+    "phoneSecondary": "+58 424-5308809"
   },
   "NotFound": {
     "title": "Página no encontrada",

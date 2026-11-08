@@ -4,4 +4,9 @@ import { afterEach, expect } from "vitest";
 
 expect.extend(toHaveNoViolations);
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  // axe(string) restores the body from a copy of its HTML, which cleanup can't
+  // find, so the copy would leak into the next test.
+  document.body.innerHTML = "";
+});
