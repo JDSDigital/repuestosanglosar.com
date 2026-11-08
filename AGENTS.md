@@ -24,7 +24,14 @@ This is the website for Repuestos Anglosar, a spare parts company in Barinas, Ve
 
 - Use pnpm, not npm or yarn.
 - Use Biome for linting and formatting.
-- Run `pnpm lint` and `pnpm build` before calling work done.
+- Run `pnpm lint`, `pnpm test` and `pnpm build` before calling work done.
+
+### Testing
+
+- Every page and component needs a colocated `<name>.test.tsx` with a jest-axe check. `src/test/a11y-coverage.test.ts` fails if one is missing.
+- Render with `renderWithIntl` from `@/test/render`, and assert text through `messages/es.json`.
+- Page tests call `axe(container.innerHTML)`, because a markup string makes axe flag content outside landmarks. Component tests call `axe(container)`, which doesn't, so a component can be tested on its own.
+- jest-axe can't check color contrast or the document title in jsdom, so check those separately.
 
 ### Git
 
