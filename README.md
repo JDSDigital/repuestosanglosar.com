@@ -6,7 +6,8 @@ Visitors see the site in Spanish. The code, comments and documentation are in En
 
 ## Stack
 
-- [Next.js](https://nextjs.org) 16 with the App Router and Cache Components
+- [Next.js](https://nextjs.org) 16 with the App Router, built as a static export
+- [Firebase Hosting](https://firebase.google.com/docs/hosting) to serve the site
 - [React](https://react.dev) 19 and TypeScript
 - [next-intl](https://next-intl.dev) for site text
 - [Biome](https://biomejs.dev) for linting and formatting
@@ -27,8 +28,10 @@ Then open [http://localhost:3000](http://localhost:3000).
 | Command | What it does |
 | --- | --- |
 | `pnpm dev` | Starts the development server |
-| `pnpm build` | Builds for production, including the type check |
-| `pnpm start` | Serves the production build |
+| `pnpm build` | Builds the static site into `out/`, including the type check |
+| `pnpm preview` | Serves the last build from `out/` locally, using the globally installed Firebase CLI |
+| `pnpm deploy:dev` | Builds and deploys to the `development` preview channel |
+| `pnpm deploy:prod` | Builds and deploys to the live site |
 | `pnpm lint` | Checks the code with Biome |
 | `pnpm format` | Formats the code with Biome |
 | `pnpm test` | Runs the tests once |
@@ -84,6 +87,28 @@ Use `getTranslations` from `next-intl/server` in async functions such as `genera
 Every page and component has an accessibility test next to it, such as `src/app/page.test.tsx` for `src/app/page.tsx`. `pnpm test` fails if one is missing. See the Testing section of `AGENTS.md` for the rules.
 
 jest-axe runs in jsdom, so it can't check color contrast or the document title.
+
+## Deployment
+
+The site is hosted on Firebase Hosting, in the `repuestos-anglosar` project. To deploy, install the [Firebase CLI](https://firebase.google.com/docs/cli), log in and run one of these:
+
+```bash
+pnpm deploy:dev   # Development: a preview channel, for checking changes first
+pnpm deploy:prod  # Production: the live site at https://repuestos-anglosar.web.app
+```
+
+Both commands run `pnpm build` first, then upload `out/`.
+
+`pnpm deploy:dev` prints the preview URL, which stays the same between deploys and is public to anyone who has the link. The channel expires 30 days after the last deploy, and Firebase deletes it then. The next `pnpm deploy:dev` recreates it, possibly at a new URL.
+
+Because the site is a static export, there's no server at runtime:
+
+- Server Actions, cookies and proxy aren't available.
+- Next's `headers`, `redirects` and `rewrites` config doesn't apply. Set those in `firebase.json` instead.
+- Dynamic routes need `generateStaticParams`.
+- Images aren't optimized, so add them to `public/` already sized and compressed.
+
+The store planned in the roadmap will probably need a server, which means moving to [Firebase App Hosting](https://firebase.google.com/docs/app-hosting).
 
 ## Roadmap
 

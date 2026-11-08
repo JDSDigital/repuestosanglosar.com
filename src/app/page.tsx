@@ -15,11 +15,10 @@ export default function Home() {
       <main className={styles.main}>
         <h1 className={styles.logo}>
           <Image
-            src="/images/logo.png"
+            src="/images/logo.webp"
             alt={t("title")}
-            width={2400}
-            height={1340}
-            sizes="(max-width: 736px) 100vw, 720px"
+            width={1440}
+            height={804}
             loading="eager"
           />
         </h1>
