@@ -10,6 +10,7 @@ Visitors see the site in Spanish. The code, comments and documentation are in En
 - [React](https://react.dev) 19 and TypeScript
 - [next-intl](https://next-intl.dev) for site text
 - [Biome](https://biomejs.dev) for linting and formatting
+- [Vitest](https://vitest.dev) and [jest-axe](https://github.com/NickColley/jest-axe) for tests
 - [pnpm](https://pnpm.io) as the package manager
 
 ## Getting started
@@ -30,6 +31,8 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `pnpm start` | Serves the production build |
 | `pnpm lint` | Checks the code with Biome |
 | `pnpm format` | Formats the code with Biome |
+| `pnpm test` | Runs the tests once |
+| `pnpm test:watch` | Runs the tests and reruns them on changes |
 
 ## Project structure
 
@@ -42,6 +45,7 @@ src/
   i18n/
     config.ts      The site's locale
     request.ts     Gives next-intl the locale and messages
+  test/            Test setup and shared test helpers
   global.d.ts      Types for locale and message keys
 ```
 
@@ -74,6 +78,12 @@ All visitor-facing text lives in `messages/es.json`, grouped by page or componen
 Use `getTranslations` from `next-intl/server` in async functions such as `generateMetadata`. A key that doesn't exist in `messages/es.json` fails the type check, and therefore `pnpm build`.
 
 `es` is the only locale, so URLs have no language prefix: the home page is `/`, not `/es`.
+
+## Testing
+
+Every page and component has an accessibility test next to it, such as `src/app/page.test.tsx` for `src/app/page.tsx`. `pnpm test` fails if one is missing. See the Testing section of `AGENTS.md` for the rules.
+
+jest-axe runs in jsdom, so it can't check color contrast or the document title.
 
 ## Roadmap
 
