@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "preview": "firebase serve --only hosting",
+    "deploy:dev": "firebase hosting:channel:deploy development --expires 30d",
+    "deploy:prod": "firebase deploy --only hosting",
     "lint": "biome check",
     "format": "biome format --write",
     "test": "vitest run",
