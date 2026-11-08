@@ -7,3 +7,25 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Project conventions
+
+This is the website for Repuestos Anglosar, a spare parts company in Barinas, Venezuela. See `README.md` for setup and the roadmap.
+
+### Language
+
+- Write code, comments, docs, commit messages and message keys in English.
+- Write visitor-facing text in Latin American Spanish.
+- Never hardcode visitor-facing text in components. Every string goes in `messages/es.json`, including metadata, `alt` text and `aria-label`s.
+- `es` is the only locale. Don't add other locales or locale routing unless the owner asks.
+- Client components that need translations require `NextIntlClientProvider` in the root layout. It isn't included yet because nothing needs it.
+
+### Tooling
+
+- Use pnpm, not npm or yarn.
+- Use Biome for linting and formatting.
+- Run `pnpm lint` and `pnpm build` before calling work done.
+
+### Business facts
+
+Don't invent business details such as the address, phone number, hours, brands or products. Ask the owner.
