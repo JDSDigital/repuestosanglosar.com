@@ -26,6 +26,12 @@ This is the website for Repuestos Anglosar, a spare parts company in Barinas, Ve
 - Use Biome for linting and formatting.
 - Run `pnpm lint` and `pnpm build` before calling work done.
 
+### Git
+
+- Never commit to `main`. Put every change on a branch and open a PR.
+- Commit messages follow [Conventional Commits](https://www.conventionalcommits.org), such as `feat: add contact page`.
+- PR titles start with a capitalized type, such as `Feat: Add contact page`.
+
 ### Business facts
 
 Don't invent business details such as the address, phone number, hours, brands or products. Ask the owner.
