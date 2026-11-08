@@ -30,7 +30,7 @@ This is the website for Repuestos Anglosar, a spare parts company in Barinas, Ve
 
 - Every page and component needs a colocated `<name>.test.tsx` with a jest-axe check. `src/test/a11y-coverage.test.ts` fails if one is missing.
 - Render with `renderWithIntl` from `@/test/render`, and assert text through `messages/es.json`.
-- For a component tested outside a page landmark, call `axe(container, { rules: { region: { enabled: false } } })`. Page tests keep the `region` rule on.
+- Page tests call `axe(container.innerHTML)`, because a markup string makes axe flag content outside landmarks. Component tests call `axe(container)`, which doesn't, so a component can be tested on its own.
 - jest-axe can't check color contrast or the document title in jsdom, so check those separately.
 
 ### Git

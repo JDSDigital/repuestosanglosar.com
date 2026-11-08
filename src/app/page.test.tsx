@@ -11,5 +11,6 @@ test("renders the home page with no accessibility violations", async () => {
   expect(
     screen.getByRole("heading", { level: 1, name: messages.HomePage.title }),
   ).toBeDefined();
-  expect(await axe(container)).toHaveNoViolations();
+  // A markup string makes axe check the landmark rules, unlike an element.
+  expect(await axe(container.innerHTML)).toHaveNoViolations();
 });

@@ -16,5 +16,6 @@ test("renders the not found page with no accessibility violations", async () => 
       .getByRole("link", { name: messages.NotFound.home })
       .getAttribute("href"),
   ).toBe("/");
-  expect(await axe(container)).toHaveNoViolations();
+  // A markup string makes axe check the landmark rules, unlike an element.
+  expect(await axe(container.innerHTML)).toHaveNoViolations();
 });
