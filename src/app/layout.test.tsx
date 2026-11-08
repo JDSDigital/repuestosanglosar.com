@@ -5,8 +5,7 @@ import RootLayout from "./layout";
 
 // next/font/google only works through the next build transform.
 vi.mock("next/font/google", () => ({
-  Geist: () => ({ variable: "font" }),
-  Geist_Mono: () => ({ variable: "font" }),
+  Saira: () => ({ variable: "font" }),
 }));
 
 test("renders the document in Spanish with no accessibility violations", async () => {
