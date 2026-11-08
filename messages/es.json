@@ -1,0 +1,16 @@
+{
+  "Metadata": {
+    "title": "Repuestos Anglosar",
+    "description": "Repuestos en Barinas, Venezuela."
+  },
+  "HomePage": {
+    "title": "Repuestos Anglosar",
+    "tagline": "Repuestos en Barinas, Venezuela.",
+    "status": "Nuestro sitio web está en construcción."
+  },
+  "NotFound": {
+    "title": "Página no encontrada",
+    "description": "Esta página no existe.",
+    "home": "Volver al inicio"
+  }
+}

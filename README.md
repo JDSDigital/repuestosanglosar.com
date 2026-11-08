@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Repuestos Anglosar
 
-## Getting Started
+Website for Repuestos Anglosar, a spare parts company in Barinas, Venezuela.
 
-First, run the development server:
+Visitors see the site in Spanish. The code, comments and documentation are in English.
+
+## Stack
+
+- [Next.js](https://nextjs.org) 16 with the App Router and Cache Components
+- [React](https://react.dev) 19 and TypeScript
+- [next-intl](https://next-intl.dev) for site text
+- [Biome](https://biomejs.dev) for linting and formatting
+- [pnpm](https://pnpm.io) as the package manager
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | What it does |
+| --- | --- |
+| `pnpm dev` | Starts the development server |
+| `pnpm build` | Builds for production, including the type check |
+| `pnpm start` | Serves the production build |
+| `pnpm lint` | Checks the code with Biome |
+| `pnpm format` | Formats the code with Biome |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+messages/
+  es.json          All text that visitors see
+public/            Static files
+src/
+  app/             Pages and layouts
+  i18n/
+    config.ts      The site's locale
+    request.ts     Gives next-intl the locale and messages
+  global.d.ts      Types for locale and message keys
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Site text
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All visitor-facing text lives in `messages/es.json`, grouped by page or component. Keys are in English and values are in Spanish.
 
-## Deploy on Vercel
+1. Add the text to `messages/es.json`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```json
+   {
+     "HomePage": {
+       "status": "Nuestro sitio web está en construcción."
+     }
+   }
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+2. Use it in a page or Server Component:
+
+   ```tsx
+   import { useTranslations } from "next-intl";
+
+   export default function Home() {
+     const t = useTranslations("HomePage");
+
+     return <p>{t("status")}</p>;
+   }
+   ```
+
+Use `getTranslations` from `next-intl/server` in async functions such as `generateMetadata`. A key that doesn't exist in `messages/es.json` fails the type check, and therefore `pnpm build`.
+
+`es` is the only locale, so URLs have no language prefix: the home page is `/`, not `/es`.
+
+## Roadmap
+
+1. Company information site (current phase)
+2. Product catalog or online store (later phase)
