@@ -116,7 +116,7 @@ The homepage photos in `public/images/photos/` are from Unsplash, under the [Uns
 
 | File | Photo | Photographer |
 | --- | --- | --- |
-| `hero.webp` | https://unsplash.com/photos/al01Ad0f_KI | Benjamin Brunner |
+| `hero.webp` | https://unsplash.com/photos/vS2shmNei2E | Erik Mclean |
 | `brakes.webp` | https://unsplash.com/photos/fwnTOncjeB0 | The DK Photography |
 | `sealsBearings.webp` | https://unsplash.com/photos/Ww-KZ1lOxM8 | Farkas Mario |
 | `drivetrain.webp` | https://unsplash.com/photos/kRp5woiVDaY | Kirill Prikhodko |

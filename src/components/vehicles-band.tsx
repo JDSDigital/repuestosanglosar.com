@@ -15,10 +15,12 @@ export function VehiclesBand() {
         height={1067}
       />
       <div className={styles.content}>
-        <h2 id="vehicles-title" className={styles.title}>
-          {t("title")}
-        </h2>
-        <p className={styles.text}>{t("text")}</p>
+        <div className={styles.textBlock}>
+          <h2 id="vehicles-title" className={styles.title}>
+            {t("title")}
+          </h2>
+          <p className={styles.text}>{t("text")}</p>
+        </div>
       </div>
     </section>
   );

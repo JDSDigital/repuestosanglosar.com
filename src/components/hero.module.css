@@ -3,7 +3,7 @@
   display: flex;
   align-items: flex-end;
   min-height: 100svh;
-  overflow: hidden;
+  overflow: clip;
   isolation: isolate;
   background: var(--navy);
 }
@@ -12,7 +12,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  overflow: hidden;
+  overflow: clip;
 }
 
 /* Text sits over the darkest part of the photo; the scrim keeps it readable. */
@@ -31,8 +31,8 @@
 
 .disc {
   /* The disc's center in this photo, so it spins around its own hub. */
-  --disc-x: 56%;
-  --disc-y: 52%;
+  --disc-x: 67%;
+  --disc-y: 62%;
 
   position: absolute;
   inset: 0;
@@ -100,10 +100,6 @@
         rgb(7 23 46 / 0%) 50%
       ),
       linear-gradient(to top, rgb(7 23 46 / 60%) 0%, transparent 30%);
-  }
-
-  .disc {
-    --disc-x: 50%;
   }
 
   .content {
@@ -179,5 +175,22 @@
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .content {
+      animation: drift-away linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 80%;
+    }
+  }
+}
+
+@keyframes drift-away {
+  to {
+    opacity: 0;
+    transform: translateY(-96px);
   }
 }

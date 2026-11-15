@@ -22,7 +22,7 @@
   display: flex;
   align-items: flex-end;
   min-height: 82svh;
-  overflow: hidden;
+  overflow: clip;
   isolation: isolate;
 }
 
@@ -86,7 +86,7 @@
 
 .media {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
   aspect-ratio: 4 / 3;
 }
 
@@ -121,10 +121,11 @@
     background: var(--navy);
   }
 
+  /* Sides alternate down the page: the hero's text is on the left, so here it's on the right. */
   .featured::after {
-    left: 40%;
+    right: 40%;
     background: linear-gradient(
-      to right,
+      to left,
       var(--navy) 0%,
       rgb(7 23 46 / 70%) 20%,
       rgb(7 23 46 / 0%) 50%
@@ -132,16 +133,16 @@
   }
 
   .featuredPhoto {
-    left: 40%;
     width: 60%;
+  }
+
+  .featuredText {
+    width: min(100%, 38vw);
+    margin-left: auto;
   }
 
   .featured .title {
     font-size: clamp(48px, 5vw, 72px);
-  }
-
-  .featuredContent > p {
-    max-width: min(32em, 36vw);
   }
 
   .band {
@@ -184,39 +185,97 @@
   }
 }
 
-/* Each photo wipes in from the edge it bleeds to as it scrolls into view. */
+/*
+ * As each section scrolls into view, its photo slides in from the edge it
+ * bleeds to behind a wide, soft edge that sweeps across it, and its text
+ * slides in from the side it sits on.
+ */
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
-    .photo {
-      animation: wipe-from-right linear both;
+    .photo,
+    .featuredPhoto,
+    .content,
+    .featuredText {
+      animation-timing-function: linear;
+      animation-fill-mode: both;
       animation-timeline: view();
-      animation-range: entry 5% cover 40%;
     }
 
-    .photoLeft .photo {
-      animation-name: wipe-from-left;
+    .photo,
+    .featuredPhoto {
+      animation-range: entry 0% cover 45%;
+      mask-size: 300% 100%;
+      mask-repeat: no-repeat;
+    }
+
+    .content,
+    .featuredText {
+      animation-range: entry 15% cover 35%;
+    }
+
+    /* The mask is three photos wide: hidden, a full-width fade, then fully shown. */
+    .photoRight .photo {
+      mask-image: linear-gradient(to right, transparent 33.3%, black 66.6%);
+      animation-name: photo-from-right;
+    }
+
+    .photoLeft .photo,
+    .featuredPhoto {
+      mask-image: linear-gradient(to left, transparent 33.3%, black 66.6%);
+      animation-name: photo-from-left;
+    }
+
+    .photoRight .content {
+      animation-name: slide-from-left;
+    }
+
+    .photoLeft .content,
+    .featuredText {
+      animation-name: slide-from-right;
     }
   }
 }
 
-@keyframes wipe-from-right {
+@keyframes photo-from-right {
   from {
-    clip-path: inset(0 0 0 100%);
-    transform: scale(1.12);
+    mask-position: 0% 0;
+    transform: translateX(16%);
   }
   to {
-    clip-path: inset(0);
-    transform: scale(1);
+    mask-position: 100% 0;
+    transform: none;
   }
 }
 
-@keyframes wipe-from-left {
+@keyframes photo-from-left {
   from {
-    clip-path: inset(0 100% 0 0);
-    transform: scale(1.12);
+    mask-position: 100% 0;
+    transform: translateX(-16%);
   }
   to {
-    clip-path: inset(0);
-    transform: scale(1);
+    mask-position: 0% 0;
+    transform: none;
+  }
+}
+
+@keyframes slide-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-64px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes slide-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(64px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }

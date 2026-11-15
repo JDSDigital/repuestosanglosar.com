@@ -14,7 +14,7 @@ export function Hero() {
           src="/images/photos/hero.webp"
           alt=""
           width={2000}
-          height={1333}
+          height={1336}
           loading="eager"
           fetchPriority="high"
         />

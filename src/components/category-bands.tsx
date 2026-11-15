@@ -24,13 +24,15 @@ export function CategoryBands() {
           height={1200}
         />
         <div className={styles.featuredContent}>
-          <h2 id="category-brakes" className={styles.title}>
-            {t("categories.brakes.name")}
-          </h2>
-          <p className={styles.lead}>{t("brakesNote")}</p>
-          <p className={styles.description}>
-            {t("categories.brakes.description")}
-          </p>
+          <div className={styles.featuredText}>
+            <h2 id="category-brakes" className={styles.title}>
+              {t("categories.brakes.name")}
+            </h2>
+            <p className={styles.lead}>{t("brakesNote")}</p>
+            <p className={styles.description}>
+              {t("categories.brakes.description")}
+            </p>
+          </div>
         </div>
       </section>
       {splitBands.map(({ key, width, height }, index) => (
