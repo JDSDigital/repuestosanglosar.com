@@ -1,0 +1,196 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 100svh;
+  overflow: clip;
+  isolation: isolate;
+  background: var(--navy);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: clip;
+}
+
+/* Text sits over the darkest part of the photo; the scrim keeps it readable. */
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    var(--navy) 0%,
+    rgb(7 23 46 / 88%) 38%,
+    rgb(7 23 46 / 20%) 75%,
+    rgb(7 23 46 / 45%) 100%
+  );
+}
+
+.disc {
+  /* The disc's center in this photo, so it spins around its own hub. */
+  --disc-x: 67%;
+  --disc-y: 62%;
+
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--disc-x) var(--disc-y);
+  transform-origin: var(--disc-x) var(--disc-y);
+  transform: scale(1.06);
+  /* Fades the photo's corners so its straight edges never show while it spins. */
+  mask-image: radial-gradient(
+    ellipse 62% 78% at var(--disc-x) var(--disc-y),
+    black 45%,
+    transparent 100%
+  );
+}
+
+.content {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding: 120px 16px 56px;
+}
+
+.title {
+  max-width: 9em;
+  font-size: clamp(36px, 12.8vw, 112px);
+  font-weight: 800;
+  font-stretch: 125%;
+  font-style: italic;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.text {
+  max-width: 30em;
+  margin-top: 24px;
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.45;
+  color: var(--chrome);
+}
+
+.phones {
+  margin-top: 32px;
+}
+
+/* On wide screens the photo takes the right side and the text sits on solid navy. */
+@media (min-width: 900px) {
+  .hero {
+    align-items: center;
+  }
+
+  .media {
+    left: 40%;
+  }
+
+  .media::after {
+    background:
+      linear-gradient(
+        to right,
+        var(--navy) 0%,
+        rgb(7 23 46 / 75%) 22%,
+        rgb(7 23 46 / 0%) 50%
+      ),
+      linear-gradient(to top, rgb(7 23 46 / 60%) 0%, transparent 30%);
+  }
+
+  .content {
+    padding: 140px 32px 96px;
+  }
+
+  .title {
+    font-size: clamp(56px, 6.6vw, 100px);
+  }
+
+  .text {
+    max-width: min(30em, 38vw);
+  }
+}
+
+/*
+ * The one big moment: the disc spins and brakes to a stop, then the headline
+ * skids in and halts as the disc settles.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .disc {
+    animation: brake 1.7s cubic-bezier(0.12, 0.8, 0.2, 1) both;
+  }
+
+  .title {
+    animation: skid 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.15) 0.95s both;
+  }
+
+  .text {
+    animation: settle 0.5s ease-out 1.45s both;
+  }
+
+  .phones {
+    animation: settle 0.5s ease-out 1.6s both;
+  }
+}
+
+@keyframes brake {
+  from {
+    transform: rotate(-200deg) scale(1.25);
+    filter: blur(3px) brightness(0.6);
+  }
+  60% {
+    filter: blur(0) brightness(1);
+  }
+  to {
+    transform: rotate(0deg) scale(1.06);
+    filter: none;
+  }
+}
+
+@keyframes skid {
+  from {
+    opacity: 0;
+    transform: translateX(28vw) skewX(-12deg);
+    filter: blur(6px);
+  }
+  70% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .content {
+      animation: drift-away linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 80%;
+    }
+  }
+}
+
+@keyframes drift-away {
+  to {
+    opacity: 0;
+    transform: translateY(-96px);
+  }
+}

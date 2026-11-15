@@ -7,6 +7,8 @@ import "./globals.css";
 const saira = Saira({
   variable: "--font-saira",
   subsets: ["latin"],
+  axes: ["wdth"],
+  style: ["normal", "italic"],
 });
 
 export async function generateMetadata(): Promise<Metadata> {

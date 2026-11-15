@@ -1,13 +1,58 @@
 {
   "Metadata": {
     "title": "Repuestos Anglosar",
-    "description": "Repuestos en Barinas, Venezuela."
+    "description": "Repuestos automotrices en Barinas, Venezuela. Especialistas en frenos."
   },
-  "HomePage": {
-    "title": "Repuestos Anglosar",
-    "tagline": "Repuestos en Barinas, Venezuela.",
-    "status": "Nuestro sitio web está en construcción.",
-    "contactTitle": "Llámanos",
+  "SiteHeader": {
+    "name": "Repuestos Anglosar",
+    "call": "Llamar"
+  },
+  "Hero": {
+    "title": "Especialistas en frenos.",
+    "text": "Repuestos automotrices en Barinas, Venezuela, para carros, camionetas, camiones y autobuses."
+  },
+  "CategoryBands": {
+    "brakesNote": "Somos especialistas en piezas de freno.",
+    "categories": {
+      "brakes": {
+        "name": "Frenos e hidrovac",
+        "description": "Pastillas, bandas, discos, tambores, mangueras, kits de bomba y de cáliper, cilindros, y diafragmas y sellos de hidrovac."
+      },
+      "sealsBearings": {
+        "name": "Estoperas y rodamientos",
+        "description": "Estoperas y rodamientos para ruedas, cajas, diferenciales y motores, y tapagrasas."
+      },
+      "drivetrain": {
+        "name": "Clutch y transmisión",
+        "description": "Kits de clutch, collarines, crucetas, arañas, tricetas, trípoides y kits de transmisión."
+      },
+      "engine": {
+        "name": "Motor, carburación y filtros",
+        "description": "Kits y empacaduras de carburador, tapaválvulas, filtros de aceite y de aire, y tapas de aceite, radiador y gasolina."
+      },
+      "rubberSuspension": {
+        "name": "Gomas y suspensión",
+        "description": "Soportes de cabina, bujes, bases de motor, gomas de cardán y guías de resortes."
+      },
+      "body": {
+        "name": "Carrocería y cerraduras",
+        "description": "Manillas de vidrios, cilindros de puertas y maletas, y controles de subevidrios."
+      }
+    }
+  },
+  "VehiclesBand": {
+    "title": "Para carros, camionetas, camiones y autobuses",
+    "text": "Americanos y japoneses, incluidos modelos de años anteriores."
+  },
+  "CallToAction": {
+    "title": "¿No ves lo que buscas?",
+    "text": "Llámanos y te ayudamos a encontrarlo."
+  },
+  "SiteFooter": {
+    "name": "Repuestos Anglosar",
+    "location": "Barinas, Venezuela"
+  },
+  "PhoneList": {
     "phonePrimary": "+58 426-7277922",
     "phoneSecondary": "+58 424-5308809"
   },
