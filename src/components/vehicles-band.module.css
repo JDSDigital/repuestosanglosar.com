@@ -1,0 +1,65 @@
+.band {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  min-height: 80svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.band::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  /* The pickup sits low in the photo, so the text and its scrim go on top. */
+  background: linear-gradient(
+    to bottom,
+    var(--navy) 0%,
+    rgb(7 23 46 / 85%) 35%,
+    rgb(7 23 46 / 10%) 70%,
+    rgb(7 23 46 / 30%) 100%
+  );
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 80%;
+}
+
+.content {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding: 64px 16px 240px;
+}
+
+.title {
+  max-width: 14em;
+  font-size: clamp(36px, 6vw, 76px);
+  font-weight: 700;
+  font-stretch: 115%;
+  font-style: italic;
+  line-height: 1;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.text {
+  max-width: 30em;
+  margin-top: 20px;
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.5;
+  color: var(--chrome);
+}
+
+@media (min-width: 900px) {
+  .content {
+    padding: 96px 32px 280px;
+  }
+}

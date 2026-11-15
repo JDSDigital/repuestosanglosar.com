@@ -1,40 +1,21 @@
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import styles from "./page.module.css";
-
-function toTelHref(phone: string) {
-  return `tel:${phone.replace(/[^+\d]/g, "")}`;
-}
+import { CallToAction } from "@/components/call-to-action";
+import { CategoryBands } from "@/components/category-bands";
+import { Hero } from "@/components/hero";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { VehiclesBand } from "@/components/vehicles-band";
 
 export default function Home() {
-  const t = useTranslations("HomePage");
-  const phones = [t("phonePrimary"), t("phoneSecondary")];
-
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <h1 className={styles.logo}>
-          <Image
-            src="/images/logo.webp"
-            alt={t("title")}
-            width={1440}
-            height={804}
-            loading="eager"
-          />
-        </h1>
-        <p className={styles.status}>{t("status")}</p>
-        <p>{t("tagline")}</p>
-        <address className={styles.contact}>
-          <h2>{t("contactTitle")}</h2>
-          <ul>
-            {phones.map((phone) => (
-              <li key={phone}>
-                <a href={toTelHref(phone)}>{phone}</a>
-              </li>
-            ))}
-          </ul>
-        </address>
+    <>
+      <SiteHeader />
+      <main>
+        <Hero />
+        <CategoryBands />
+        <VehiclesBand />
+        <CallToAction />
       </main>
-    </div>
+      <SiteFooter />
+    </>
   );
 }

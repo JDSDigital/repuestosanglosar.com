@@ -110,6 +110,21 @@ Because the site is a static export, there's no server at runtime:
 
 The store planned in the roadmap will probably need a server, which means moving to [Firebase App Hosting](https://firebase.google.com/docs/app-hosting).
 
+## Photo credits
+
+The homepage photos in `public/images/photos/` are from Unsplash, under the [Unsplash License](https://unsplash.com/license).
+
+| File | Photo | Photographer |
+| --- | --- | --- |
+| `hero.webp` | https://unsplash.com/photos/al01Ad0f_KI | Benjamin Brunner |
+| `brakes.webp` | https://unsplash.com/photos/fwnTOncjeB0 | The DK Photography |
+| `sealsBearings.webp` | https://unsplash.com/photos/Ww-KZ1lOxM8 | Farkas Mario |
+| `drivetrain.webp` | https://unsplash.com/photos/kRp5woiVDaY | Kirill Prikhodko |
+| `engine.webp` | https://unsplash.com/photos/cZQeUaHlCsg | Silas Lundquist |
+| `rubberSuspension.webp` | https://unsplash.com/photos/U4i2bZw4wms | Wesley Tingey |
+| `body.webp` | https://unsplash.com/photos/WQi8u2YXxJo | Linus Belanger |
+| `vehicles.webp` | https://unsplash.com/photos/YE3vIwURtY8 | Danny Greenberg |
+
 ## Roadmap
 
 1. Company information site (current phase)

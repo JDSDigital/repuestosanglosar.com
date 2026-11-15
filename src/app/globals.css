@@ -1,8 +1,17 @@
 :root {
-  --background: #07172e;
-  --foreground: #d6dce4;
-  --muted: #a8b6c8;
-  --accent: #7fb8f0;
+  --navy: #07172e;
+  --navy-raised: #0c2240;
+  --cobalt: #1f63c6;
+  --cobalt-deep: #1852a8;
+  --chrome: #d6dce4;
+  --steel: #a8b6c8;
+  --sky: #7fb8f0;
+  --white: #ffffff;
+
+  --background: var(--navy);
+  --foreground: var(--chrome);
+  --muted: var(--steel);
+  --accent: var(--sky);
 
   color-scheme: dark;
 }
@@ -23,7 +32,7 @@ body {
   flex-direction: column;
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-saira), Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

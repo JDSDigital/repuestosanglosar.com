@@ -1,0 +1,222 @@
+.title {
+  font-size: clamp(34px, 5vw, 60px);
+  font-weight: 700;
+  font-stretch: 115%;
+  font-style: italic;
+  line-height: 1.02;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.description {
+  max-width: 32em;
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--steel);
+}
+
+/* Brakes: the specialty gets a full-bleed photo band of its own. */
+.featured {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 82svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.featured::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to top,
+    var(--navy) 0%,
+    rgb(7 23 46 / 90%) 42%,
+    rgb(7 23 46 / 25%) 80%,
+    rgb(7 23 46 / 55%) 100%
+  );
+}
+
+.featuredPhoto {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% 50%;
+}
+
+.featuredContent {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding: 96px 16px 64px;
+}
+
+.featured .title {
+  font-size: clamp(42px, 7vw, 88px);
+}
+
+.lead {
+  max-width: 22em;
+  margin-top: 20px;
+  font-size: clamp(21px, 2.6vw, 28px);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--sky);
+  text-wrap: balance;
+}
+
+/* Split bands: photo bleeds to one edge, text on the other, sides alternate. */
+.band {
+  --band: var(--navy);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--band);
+}
+
+.photoRight {
+  --band: var(--navy-raised);
+}
+
+.media {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+}
+
+/* A fade into the band color on the side that meets the text ties each photo to the page. */
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, var(--band) 0%, transparent 28%);
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.78) contrast(1.05);
+}
+
+.content {
+  padding: 40px 16px 56px;
+}
+
+@media (min-width: 900px) {
+  .featuredContent {
+    padding: 120px 32px 96px;
+  }
+
+  .featured {
+    align-items: center;
+    background: var(--navy);
+  }
+
+  .featured::after {
+    left: 40%;
+    background: linear-gradient(
+      to right,
+      var(--navy) 0%,
+      rgb(7 23 46 / 70%) 20%,
+      rgb(7 23 46 / 0%) 50%
+    );
+  }
+
+  .featuredPhoto {
+    left: 40%;
+    width: 60%;
+  }
+
+  .featured .title {
+    font-size: clamp(48px, 5vw, 72px);
+  }
+
+  .featuredContent > p {
+    max-width: min(32em, 36vw);
+  }
+
+  .band {
+    grid-template-columns: 1fr 1fr;
+    min-height: min(78svh, 720px);
+  }
+
+  .media {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+
+  .photoRight .media::after {
+    background: linear-gradient(to right, var(--band) 0%, transparent 22%);
+  }
+
+  .photoLeft .media::after {
+    background: linear-gradient(to left, var(--band) 0%, transparent 22%);
+  }
+
+  .content {
+    align-self: center;
+    max-width: 640px;
+    padding: 96px 64px;
+  }
+
+  .photoRight .content {
+    grid-row: 1;
+    grid-column: 1;
+    justify-self: end;
+  }
+
+  .photoRight .media {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .photoLeft .content {
+    justify-self: start;
+  }
+}
+
+/* Each photo wipes in from the edge it bleeds to as it scrolls into view. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .photo {
+      animation: wipe-from-right linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 40%;
+    }
+
+    .photoLeft .photo {
+      animation-name: wipe-from-left;
+    }
+  }
+}
+
+@keyframes wipe-from-right {
+  from {
+    clip-path: inset(0 0 0 100%);
+    transform: scale(1.12);
+  }
+  to {
+    clip-path: inset(0);
+    transform: scale(1);
+  }
+}
+
+@keyframes wipe-from-left {
+  from {
+    clip-path: inset(0 100% 0 0);
+    transform: scale(1.12);
+  }
+  to {
+    clip-path: inset(0);
+    transform: scale(1);
+  }
+}

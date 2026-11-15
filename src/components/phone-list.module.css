@@ -1,0 +1,60 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 24px;
+  font-size: 19px;
+  font-weight: 600;
+  font-stretch: 110%;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  border-radius: 6px;
+  transition:
+    background-color 160ms ease,
+    transform 120ms ease;
+}
+
+.button:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.button:focus-visible {
+  outline: 3px solid var(--sky);
+  outline-offset: 3px;
+}
+
+.cobalt {
+  color: var(--white);
+  background: var(--cobalt);
+}
+
+.cobalt:hover {
+  background: var(--cobalt-deep);
+}
+
+.white {
+  color: var(--navy);
+  background: var(--white);
+}
+
+.white:hover {
+  background: var(--chrome);
+}
+
+.white:focus-visible {
+  outline-color: var(--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+}
