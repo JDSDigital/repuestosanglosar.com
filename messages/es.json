@@ -1,7 +1,25 @@
 {
   "Metadata": {
-    "title": "Repuestos Anglosar",
-    "description": "Repuestos automotrices en Barinas, Venezuela. Especialistas en frenos."
+    "title": "Repuestos Anglosar | Repuestos de frenos en Barinas",
+    "titleTemplate": "%s | Repuestos Anglosar",
+    "description": "Repuestos automotrices en Barinas, Venezuela. Especialistas en frenos e hidrovac. Estoperas, rodamientos y clutch para carros, camionetas y camiones.",
+    "siteName": "Repuestos Anglosar",
+    "shortName": "Anglosar",
+    "ogImageAlt": "Logo de Repuestos Anglosar sobre un disco y un cáliper de freno"
+  },
+  "StructuredData": {
+    "areaServed": "Barinas, Venezuela",
+    "city": "Barinas",
+    "region": "Barinas",
+    "catalog": "Repuestos automotrices",
+    "contactType": "Ventas"
+  },
+  "LlmsTxt": {
+    "location": "Ubicación",
+    "vehicles": "Vehículos",
+    "categories": "Categorías",
+    "phones": "Teléfonos",
+    "website": "Sitio web"
   },
   "SiteHeader": {
     "name": "Repuestos Anglosar",

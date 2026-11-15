@@ -3,7 +3,7 @@ import { axe } from "jest-axe";
 import { expect, test } from "vitest";
 import { renderWithIntl } from "@/test/render";
 import messages from "../../messages/es.json";
-import Home from "./page";
+import Home, { metadata } from "./page";
 
 const { categories } = messages.CategoryBands;
 
@@ -51,4 +51,16 @@ test("shows the phone numbers in the hero and in the call to action", () => {
   for (const link of links) {
     expect(link.getAttribute("href")).toBe("tel:+584267277922");
   }
+});
+
+test("declares itself as the canonical home page", () => {
+  expect(metadata.alternates?.canonical).toBe("/");
+});
+
+test("includes the structured data", () => {
+  const { container } = renderWithIntl(<Home />);
+
+  expect(
+    container.querySelector('script[type="application/ld+json"]'),
+  ).not.toBeNull();
 });

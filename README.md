@@ -30,7 +30,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 | `pnpm dev` | Starts the development server |
 | `pnpm build` | Builds the static site into `out/`, including the type check |
 | `pnpm preview` | Serves the last build from `out/` locally, using the globally installed Firebase CLI |
-| `pnpm deploy:dev` | Builds and deploys to the `development` preview channel |
+| `pnpm deploy:dev` | Builds and deploys to the `development` preview channel, hidden from search engines |
 | `pnpm deploy:prod` | Builds and deploys to the live site |
 | `pnpm lint` | Checks the code with Biome |
 | `pnpm format` | Formats the code with Biome |
@@ -50,6 +50,8 @@ src/
     request.ts     Gives next-intl the locale and messages
   test/            Test setup and shared test helpers
   global.d.ts      Types for locale and message keys
+  llms-txt.ts      Builds /llms.txt from the site text
+  site.ts          Canonical URL, theme color, Open Graph image and social links
 ```
 
 ## Site text
@@ -110,6 +112,25 @@ Because the site is a static export, there's no server at runtime:
 
 The store planned in the roadmap will probably need a server, which means moving to [Firebase App Hosting](https://firebase.google.com/docs/app-hosting).
 
+## SEO and link previews
+
+The canonical domain is `https://repuestosanglosar.com`, set in `src/site.ts`. Every page and the Open Graph tags point there, so the `web.app` copy and the preview channel don't compete with it in search.
+
+- `src/app/layout.tsx` sets the title template, description, Open Graph and Twitter tags, and the theme color.
+- Each page sets its own canonical URL, such as `alternates: { canonical: "/" }` in `src/app/page.tsx`.
+- `src/components/structured-data.tsx` adds schema.org JSON-LD for the store to the home page. Check it with the [Rich Results Test](https://search.google.com/test/rich-results) and the [Schema Markup Validator](https://validator.schema.org/).
+- `robots.txt`, `sitemap.xml`, `manifest.webmanifest` and `llms.txt` are generated at build time from `src/app/`.
+- `pnpm deploy:dev` builds with `DEPLOY_TARGET=preview`, which adds `noindex` to every page and makes `robots.txt` block all crawlers.
+- The site text in `messages/es.json` feeds the metadata, JSON-LD and `llms.txt`, so editing it updates all of them.
+
+To check link previews after a deploy, use the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/), which also refreshes the cached preview, or send the link in WhatsApp.
+
+After the domain goes live:
+
+1. Verify the domain in [Google Search Console](https://search.google.com/search-console) and submit `https://repuestosanglosar.com/sitemap.xml`.
+2. Import the site into [Bing Webmaster Tools](https://www.bing.com/webmasters), which also feeds Copilot and ChatGPT search.
+3. Create a [Google Business Profile](https://business.google.com) as a service-area business. It doesn't need a public street address.
+
 ## Photo credits
 
 The homepage photos in `public/images/photos/` are from Unsplash, under the [Unsplash License](https://unsplash.com/license).
@@ -124,6 +145,8 @@ The homepage photos in `public/images/photos/` are from Unsplash, under the [Uns
 | `rubberSuspension.webp` | https://unsplash.com/photos/U4i2bZw4wms | Wesley Tingey |
 | `body.webp` | https://unsplash.com/photos/WQi8u2YXxJo | Linus Belanger |
 | `vehicles.webp` | https://unsplash.com/photos/YE3vIwURtY8 | Danny Greenberg |
+
+`public/images/og.jpg`, the image shown when a link to the site is shared, is the hero photo by Erik Mclean, darkened, with the logo on top.
 
 ## Roadmap
 
